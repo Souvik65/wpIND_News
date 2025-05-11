@@ -24,7 +24,8 @@ jobs:
         pip install -r requirements.txt
 
     - name: Ensure seen_urls.txt exists
-      run: touch seen_urls.txt
+      run: |
+        if [ ! -f seen_urls.txt ]; then touch seen_urls.txt; fi
 
     - name: Run News Script
       env:
