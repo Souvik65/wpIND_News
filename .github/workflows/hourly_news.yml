@@ -25,9 +25,8 @@ jobs:
 
       - name: Run the script
         env:
-          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
-          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-          FROM_WHATSAPP_NUMBER: ${{ secrets.FROM_WHATSAPP_NUMBER }}
-          TO_WHATSAPP_NUMBER: ${{ secrets.TO_WHATSAPP_NUMBER }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TWILIO_WHATSAPP_NUMBER: ${{ secrets.FROM_WHATSAPP_NUMBER }}
+          TARGET_WHATSAPP_NUMBER: ${{ secrets.TO_WHATSAPP_NUMBER }}
         run: python news_script.py
-
