@@ -1,37 +1,37 @@
-name: News to WhatsApp Alert
+# name: News to WhatsApp Alert
 
-on:
-  schedule:
-    - cron: "0 * * * *"  # Runs every hour
-  workflow_dispatch:       # Allow manual trigger
+# on:
+#   schedule:
+#     - cron: "0 * * * *"  # Runs every hour
+#   workflow_dispatch:       # Allow manual trigger
 
-jobs:
-  run-script:
-    runs-on: ubuntu-latest
+# jobs:
+#   run-script:
+#     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+#     steps:
+#     - name: Checkout Repository
+#       uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
+#     - name: Set up Python
+#       uses: actions/setup-python@v4
+#       with:
+#         python-version: "3.10"
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+#     - name: Install dependencies
+#       run: |
+#         python -m pip install --upgrade pip
+#         pip install -r requirements.txt
 
-    - name: Ensure seen_urls.txt exists
-      run: |
-        if [ ! -f seen_urls.txt ]; then touch seen_urls.txt; fi
+#     - name: Ensure seen_urls.txt exists
+#       run: |
+#         if [ ! -f seen_urls.txt ]; then touch seen_urls.txt; fi
 
-    - name: Run News Script
-      env:
-        TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-        TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-        TWILIO_WHATSAPP_NUMBER: ${{ secrets.TWILIO_WHATSAPP_NUMBER }}
-        TARGET_WHATSAPP_NUMBER: ${{ secrets.TARGET_WHATSAPP_NUMBER }}
-      run: |
-        python news_script.py
+#     - name: Run News Script
+#       env:
+#         TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+#         TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+#         TWILIO_WHATSAPP_NUMBER: ${{ secrets.TWILIO_WHATSAPP_NUMBER }}
+#         TARGET_WHATSAPP_NUMBER: ${{ secrets.TARGET_WHATSAPP_NUMBER }}
+#       run: |
+#         python news_script.py
