@@ -23,11 +23,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Print environment variables for debugging
+        run: |
+          echo "TWILIO_ACCOUNT_SID is set: ${TWILIO_ACCOUNT_SID:+yes}"
+          echo "TWILIO_AUTH_TOKEN is set: ${TWILIO_AUTH_TOKEN:+yes}"
+          echo "TWILIO_WHATSAPP_NUMBER is set: ${TWILIO_WHATSAPP_NUMBER:+yes}"
+          echo "TARGET_WHATSAPP_NUMBER is set: ${TARGET_WHATSAPP_NUMBER:+yes}"
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TWILIO_WHATSAPP_NUMBER: ${{ secrets.FROM_WHATSAPP_NUMBER }}
+          TARGET_WHATSAPP_NUMBER: ${{ secrets.TO_WHATSAPP_NUMBER }}
+
       - name: Run the script
         env:
-          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
-          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-          FROM_WHATSAPP_NUMBER: ${{ secrets.FROM_WHATSAPP_NUMBER }}
-          TO_WHATSAPP_NUMBER: ${{ secrets.TO_WHATSAPP_NUMBER }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TWILIO_WHATSAPP_NUMBER: ${{ secrets.FROM_WHATSAPP_NUMBER }}
+          TARGET_WHATSAPP_NUMBER: ${{ secrets.TO_WHATSAPP_NUMBER }}
         run: python news_script.py
 
